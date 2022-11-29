@@ -22,7 +22,7 @@ type Card struct {
 
 //Main
 
-func main() {
+func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
