@@ -20,14 +20,12 @@ type Card struct {
 	Weight int
 }
 
-//Main
-
+//Init
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
 //Util
-
 func getCard() *Card {
 	//Weights are counted to 13 to get face cards, then switched back to 10 to follow blackjack rules
 	newCard := new(Card)
