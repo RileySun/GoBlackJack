@@ -72,8 +72,8 @@ func CheckHand(currentHand *Hand) int {
 	//0 = under, 1 = Win Condition, 2 = Bust	
 	if currentHand.Total > 21 {
 		//Ace complicatedness	
-		checked := aceCheck()
-		if !aceChecked {
+		checked := aceCheck(currentHand)
+		if !checked {
 			return 2
 		}	
 	} else if currentHand.Total == 21 {
