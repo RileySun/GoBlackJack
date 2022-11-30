@@ -8,7 +8,7 @@ import(
 
 //Dec
 var SUITS = []string{"♠", "♥", "♣", "♦"}
-var FACES = []string{"J", "Q", "K"}
+var FACES = []string{"J", "Q", "K", "A"}
 
 type Hand struct {
 	Cards []*Card
@@ -27,10 +27,9 @@ func init() {
 
 //Util
 func getCard() *Card {
-	//Weights are counted to 13 to get face cards, then switched back to 10 to follow blackjack rules
 	newCard := new(Card)
 	newCard.Suit = SUITS[rand.Intn(3)]
-	newCard.Weight = rand.Intn(13-1) + 1
+	newCard.Weight = rand.Intn(10-1) + 1
 	
 	if newCard.Weight > 10 {
 		newCard.Symbol = FACES[rand.Intn(2)]
@@ -38,8 +37,8 @@ func getCard() *Card {
 	} else if newCard.Weight > 1 && newCard.Weight < 10 {
 		newCard.Symbol = strconv.Itoa(newCard.Weight)
 	} else {
-		newCard.Symbol = "A"
-		newCard.Weight = 11
+		newCard.Symbol = FACES[3]
+		newCard.Weight = 11 //Starts as 11 and is set lower if total gets over 21
 	}
 	
 	return newCard
