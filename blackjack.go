@@ -4,7 +4,6 @@ import(
 	"math/rand"
 	"time"
 	"strconv"
-	"fmt"
 )
 
 //Dec
