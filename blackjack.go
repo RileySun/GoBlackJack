@@ -38,7 +38,6 @@ func getCard() *Card {
 	} else if newCard.Weight > 1 && newCard.Weight < 10 {
 		newCard.Symbol = strconv.Itoa(newCard.Weight)
 	} else {
-		fmt.Println("WE HAVE AN ACE")
 		newCard.Symbol = FACES[3]
 		newCard.Weight = 11 //Starts as 11 and is set lower if total gets over 21
 	}
@@ -51,6 +50,11 @@ func GetHand() *Hand {
 	newCards := []*Card{getCard(), getCard()}
 	newHand.Cards = newCards
 	newHand.Total = newHand.Cards[0].Weight + newHand.Cards[1].Weight
+	
+	//Has 2 Aces
+	if newHand.Total == 22 {
+		newHand.Cards[0].Weight = 1
+	}
 	
 	return newHand
 }
