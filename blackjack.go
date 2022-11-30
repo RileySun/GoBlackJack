@@ -35,8 +35,11 @@ func getCard() *Card {
 	if newCard.Weight > 10 {
 		newCard.Symbol = FACES[rand.Intn(2)]
 		newCard.Weight = 10 //Switch weight back to 10
-	} else {
+	} else if newCard.Weight > 1 && newCard.Weight < 10 {
 		newCard.Symbol = strconv.Itoa(newCard.Weight)
+	} else {
+		newCard.Symbol = "A"
+		newCard.Weight = 11
 	}
 	
 	return newCard
@@ -65,12 +68,29 @@ func AddCard(currentHand *Hand) *Hand {
 }
 
 func CheckHand(currentHand *Hand) int {
-	//0 = under, 1 = Win Condition, 2 = Bust
-	if currentHand.Total < 21 {
-		return 0
+	//0 = under, 1 = Win Condition, 2 = Bust	
+	if currentHand.Total > 21 {
+		//Ace complicatedness	
+		checked := aceCheck()
+		if !aceChecked {
+			return 2
+		}	
 	} else if currentHand.Total == 21 {
 		return 1
 	} else {
-		return 2
+		return 0
 	}
+	
+	return CheckHand(currentHand)
+}
+
+func aceCheck(currentHand *Hand) bool {
+	for _, element := range currentHand.Cards {
+			if element.Symbol == "A" && element.Weight != 1 {
+				element.Weight = 1
+				return true
+			}
+		}
+	}
+	return false
 }
