@@ -87,10 +87,9 @@ func CheckHand(currentHand *Hand) int {
 
 func aceCheck(currentHand *Hand) bool {
 	for _, element := range currentHand.Cards {
-			if element.Symbol == "A" && element.Weight != 1 {
-				element.Weight = 1
-				return true
-			}
+		if element.Symbol == "A" && element.Weight != 1 {
+			element.Weight = 1
+			return true
 		}
 	}
 	return false
