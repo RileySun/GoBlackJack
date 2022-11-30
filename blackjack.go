@@ -4,6 +4,7 @@ import(
 	"math/rand"
 	"time"
 	"strconv"
+	"fmt"
 )
 
 //Dec
@@ -37,6 +38,7 @@ func getCard() *Card {
 	} else if newCard.Weight > 1 && newCard.Weight < 10 {
 		newCard.Symbol = strconv.Itoa(newCard.Weight)
 	} else {
+		fmt.Println("WE HAVE AN ACE")
 		newCard.Symbol = FACES[3]
 		newCard.Weight = 11 //Starts as 11 and is set lower if total gets over 21
 	}
