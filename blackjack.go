@@ -59,41 +59,47 @@ func GetHand() *Hand {
 }
 
 func AddCard(currentHand *Hand) *Hand {
-	newCards := append(currentHand.Cards, getCard())
-	currentHand.Cards = newCards
-	currentHand.Total = getHandTotal(currentHand)
-	return currentHand
+	newHand := currentHand
+	newHand.Cards = append(currentHand.Cards, getCard())
+	newHand.Total = getHandTotal(newHand)
+	return newHand
 }
 
 func CheckHand(currentHand *Hand) int {
+	newHand := currentHand
+	checked := false
+	
 	//0 = under, 1 = Win Condition, 2 = Bust	
-	if currentHand.Total > 21 {
-		//Ace complicatedness	
-		checked := checkAces(currentHand)
+	if newHand.Total > 21 {
+		//Ace complicatedness
+		checked, newHand = checkAces(currentHand)
 		if !checked {
 			return 2
 		}	
-	} else if currentHand.Total == 21 {
+	} else if newHand.Total == 21 {
 		return 1
 	} else {
 		return 0
 	}
 	
-	return CheckHand(currentHand)
+	return CheckHand(newHand)
 }
 
-func checkAces(currentHand *Hand) bool {
-	for _, element := range currentHand.Cards {
+func checkAces(currentHand *Hand) (bool, *Hand) {
+	newHand := currentHand
+	for _, element := range newHand.Cards {
 		if element.Symbol == "A" && element.Weight != 1 {
 			element.Weight = 1
-			currentHand.Total = getHandTotal(currentHand)
-			return true
+			newHand.Total = getHandTotal(newHand)
+			if getHandTotal(newHand) < 21 {
+				return true, newHand
+			}
 		}
 	}
-	return false
+	return false, newHand
 }
 
-func getHandTotal(curentHand *Hand) int {
+func getHandTotal(currentHand *Hand) int {
 	total := 0
 	for _, element := range currentHand.Cards {
 		total += element.Weight
