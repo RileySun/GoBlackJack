@@ -93,10 +93,10 @@ func checkAces(currentHand *Hand) bool {
 	return false
 }
 
-func getHandTotal(curentHand *Hand) {
+func getHandTotal(curentHand *Hand) int {
 	total := 0
 	for _, element := range currentHand.Cards {
 		total += element.Weight
 	}
-	currentHand.Total = total
+	return total
 }
