@@ -50,10 +50,8 @@ func GetHand() *Hand {
 	newHand.Cards = newCards
 	newHand.Total = getHandTotal(newHand)
 	
-	//Has 2 Aces
-	if newHand.Total == 22 {
-		newHand.Cards[0].Weight = 1
-	}
+	//Ace Checking
+	_, newHand = checkAces(newHand)
 	
 	return newHand
 }
