@@ -66,15 +66,16 @@ func AddCard(currentHand *Hand) *Hand {
 func CheckHand(currentHand *Hand) int {
 	newHand := currentHand
 	checked := false
+	total = getHandTotal(newHand)
 	
 	//0 = under, 1 = Win Condition, 2 = Bust	
-	if newHand.Total > 21 {
+	if total > 21 {
 		//Ace complicatedness
 		checked, newHand = checkAces(currentHand)
 		if !checked {
 			return 2
 		}	
-	} else if newHand.Total == 21 {
+	} else if total == 21 {
 		return 1
 	} else {
 		return 0
