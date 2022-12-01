@@ -87,7 +87,7 @@ func CheckHand(currentHand *Hand) int {
 func checkAces(currentHand *Hand) (bool, *Hand) {
 	newHand := currentHand
 	for _, element := range newHand.Cards {
-		if element.Symbol == "A" && element.Weight != 1 {
+		if element.Symbol == "A" && element.Weight != 1 && newHand.Total > 21 {
 			element.Weight = 1
 			newHand.Total = getHandTotal(newHand)
 			if getHandTotal(newHand) < 21 {
