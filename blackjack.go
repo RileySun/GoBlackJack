@@ -29,7 +29,7 @@ func init() {
 func getCard() *Card {
 	newCard := new(Card)
 	newCard.Suit = SUITS[rand.Intn(3)]
-	newCard.Weight = rand.Intn(10-1) + 1
+	newCard.Weight = rand.Intn(13-1) + 1
 	
 	if newCard.Weight > 10 {
 		newCard.Symbol = FACES[rand.Intn(2)]
